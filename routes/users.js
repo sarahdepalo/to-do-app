@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const UserModel = require('../models/UserModel');
 
 
-router.get('/users/register', (req, res) => {
+router.get('/signup', (req, res) => {
     res.render('template', {
         locals: {
             title: "New User Registration",
@@ -16,7 +17,7 @@ router.get('/users/register', (req, res) => {
     });
 })
 
-router.get('/users/login', (req, res) => {
+router.get('/login', (req, res) => {
     res.render('template', {
         locals: {
             title: 'User Login',
@@ -29,4 +30,20 @@ router.get('/users/login', (req, res) => {
     });
 })
 
-router.post('users/signup', async (req,res) =>)
+router.post('/signup', async (req,res) => {
+    const { name, username, password } = req.body;
+
+    const salt = bcrypt.genSaltSync();
+    const hash = bcrypt.hashSync(password, salt);
+
+    const response = await UserModel.createNewUser(name, username, hash);
+
+    if (response.id) {
+        res.redirect('/users/login');
+    } else {
+        res.status(500).send("ERROR: Please try resubmitting the form.");
+    }
+});
+
+
+module.exports = router;

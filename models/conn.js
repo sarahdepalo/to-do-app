@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const host =process.env.DB_HOST;
@@ -6,15 +7,17 @@ const user = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
 
 const pgp = require('pg-promise')({
-    query: function(event){
-        console.log('QUERY', event.query);
+
+    query: function (event) {
+        console.log('QUERY: ', event.query)
+
     }
 });
 
-const options = {
-    host, 
-    database, 
-    user, 
+const options =  {
+    host,
+    database,
+    user,
     password
 }
 
