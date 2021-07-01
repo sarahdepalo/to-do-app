@@ -8,13 +8,6 @@ const port = 3000;
 const express = require('express');
 const app = express();
 
-const helmet = require('helmet');
-app.use(helmet()); //middlewear for security
-
-const morgan = require('morgan');
-const logger = morgan('tiny');//middlewear for logging
-app.use(logger);
-
 app.use(express.json()); // adding form information
 app.use(express.urlencoded({extended: false}));
 app.use(express.static('public'));// middlewear for using static assets, front end stuff like css and images
@@ -31,5 +24,7 @@ server.listen(port, hostname, () => {
 });
 
 const rootController = require('./routes/index');
+// const usersController = require('./routes/users');
 
 app.use('/', rootController);
+// app.use('/users', usersController);
