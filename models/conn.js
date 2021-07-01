@@ -12,9 +12,9 @@ const pgp = require('pg-promise')({
 });
 
 const options = {
-    host,
-    database,
-    user,
+    host, 
+    database, 
+    user, 
     password
 }
 
