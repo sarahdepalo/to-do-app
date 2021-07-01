@@ -34,11 +34,10 @@ server.listen(port, hostname, () => {
 });
 
 const rootController = require('./routes/index');
-
 const usersController = require('./routes/users');
+const tasksController = require('./routes/tasks');
 
 app.use('/', rootController);
 app.use('/users', usersController);
-
 app.use('/tasks', tasksController);
 

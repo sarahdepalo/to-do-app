@@ -45,5 +45,27 @@ router.post('/signup', async (req,res) => {
     }
 });
 
+router.post('/users/login', async (req, res) => {
+    const { username, password} = req.body;
+    const user = new UserModel(null, null, username, password);
+    const response = await user.login();
+
+    if(!!response.isValid) {
+        const { isValid, user_id, username } = response;
+
+        req.session.is_logged_in = isValid;
+        req.session.user_id = user_id;
+        req.session.username = username;
+        res.redirect('/tasks');
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+router.get('/users/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+})
+
 
 module.exports = router;
