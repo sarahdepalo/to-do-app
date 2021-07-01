@@ -27,4 +27,8 @@ const rootController = require('./routes/index');
 // const usersController = require('./routes/users');
 
 app.use('/', rootController);
+<<<<<<< HEAD
 // app.user('/users', usersController);
+=======
+// app.use('/users', usersController);
+>>>>>>> 64bdbb5f08df9b536d0319d6f5c3d4c9e3a9489f
