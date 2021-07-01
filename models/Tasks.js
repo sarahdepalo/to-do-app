@@ -11,7 +11,7 @@ class Tasks {
 
     static async getAllTasks() {
         try {
-            const response = await db.any(`SELECT * FROM tasks WHERE user_id = '${this.user_id}';`)
+            const response = await db.any(`SELECT * FROM tasks;`)
             return response;
         } catch (error) {
             console.error('ERROR:', error);
@@ -22,9 +22,9 @@ class Tasks {
         try {
             const response = await db.result (
                 `INSERT INTO tasks
-                    (task_name, task_description, user_id)
+                    (task_name, task_description, user_id, completion_status)
                 VALUES
-                    ('${this.task_name}', '${this.task_description}', ${this.user_id});
+                    ('${this.task_name}', '${this.task_description}', ${this.user_id}, false);
                 `
             )
             return response;
