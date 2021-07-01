@@ -8,7 +8,7 @@ CREATE TABLE users (
 CREATE TABLE tasks (
     id serial PRIMARY KEY,
     task_name text,
-    task_description,
+    task_description text,
     completion_status boolean DEFAULT FALSE,
-    user_id text REFERENCES users(id),
+    user_id INTEGER REFERENCES users(id)
 );
