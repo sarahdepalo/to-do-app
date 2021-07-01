@@ -7,6 +7,7 @@ const port = 3000;
 
 const express = require('express');
 const app = express();
+const session = require('express-session');
 
 app.use(express.json()); // adding form information
 app.use(express.urlencoded({extended: false}));
@@ -17,6 +18,15 @@ app.engine('html', es6Renderer);
 app.set('views', './views');
 app.set('view engine', 'html');
 
+app.use(
+    session({
+        secret: 'get rad!',
+        resave: false,
+        saveUninitialized: false,
+        is_logged_in: false
+    })
+);
+
 const server = http.createServer(app);
 
 server.listen(port, hostname, () => {
@@ -24,7 +34,7 @@ server.listen(port, hostname, () => {
 });
 
 const rootController = require('./routes/index');
-// const usersController = require('./routes/users');
+const usersController = require('./routes/users');
 
 app.use('/', rootController);
-// app.use('/users', usersController);
+app.use('/users', usersController);
