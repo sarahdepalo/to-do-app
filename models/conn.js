@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const host = process.env.DB_HOST;
